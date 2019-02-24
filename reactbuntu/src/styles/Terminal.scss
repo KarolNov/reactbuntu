@@ -61,16 +61,23 @@
     }
     .terminalBody {
         background: rgba(56, 4, 40, .9);
-        height: calc(100% - 25px);
+        height: inherit;
+        overflow-wrap: normal;
+        overflow-y: scroll;
+        overflow-x: clip;
         margin-top: -1px;
         padding-top: 2px;
         padding-left: 2px;
         font-family: 'Ubuntu mono';
         color: #ddd;
         font-size: 15px;
+        cursor: default !important;
         & .prompt {
             margin-top: 10px;
             display: flex;
+            overflow-x: hidden;
+            overflow-wrap: break-word;
+            width: inherit;
         }
         & .user {
           color: #87d441;

@@ -10,7 +10,10 @@ class Terminal extends Component {
         super(props);
         this.state = {
             command: "help",
-            commandsArchive: []
+            commandsArchive: [],
+            terminal: {
+                scrolling: true
+            }
         }
         this.getKey = this.getKey.bind(this);
     }
@@ -54,9 +57,13 @@ class Terminal extends Component {
             prompt.push(<span className="location">{this.props.directory}</span>);
             prompt.push("$");
             prompt.push(<span className="command">{this.state.commandsArchive[i].command}</span>);
-            let output = commandsArchive[i].output;
+            let output = commandsArchive[i].output.split("\n");
             archive.push(<div className={"prompt"}>{prompt}</div>);
-            archive.push(<div>{output}</div>);
+            let multiline = [];
+            output.forEach(line=>{
+                multiline.push(<p>{line}<br/></p>)
+            })
+            archive.push(<div>{multiline}</div>);
         }
 
         let terminalArchive = [];
@@ -68,6 +75,14 @@ class Terminal extends Component {
         });
     }
 
+    maximize(){
+        this.setState({
+            height: "100%",
+            width: "100%",
+            maximized: !this.state.maximized
+        })
+    }
+
     render() {
         return (
             <Rnd bounds="window" default={{
@@ -75,13 +90,25 @@ class Terminal extends Component {
                 y: 200,
                 width: 500,
                 height: 300
-            }} minWidth={250} minHeight={200}>
-                <div className="terminal" draggable onKeyDown={this.getKey} tabIndex='0'>
-                    <div className="toolbar">
+            }} minWidth={250} minHeight={200}
+            disableDragging={!this.state.terminal.drag}
+            size={this.state.maximized ? {
+                width: this.state.width,
+                height: this.state.height
+            } : null}
+            position={this.state.maximized ? {
+                x: 0,
+                y: 0
+            } : null}
+            onResize={(e)=>console.log(e)}
+            >
+                <div className="terminal" onKeyDown={this.getKey} tabIndex='0'>
+                    <div className="toolbar" onMouseEnter={()=>this.setState({terminal:{drag: true}})} 
+                    onMouseLeave={()=>this.setState({terminal:{drag: false}})}>
                         <div className="buttons">
                             <button className="exit">x</button>
                             <button className="minimize">─</button>
-                            <button>◻</button>
+                            <button onClick={()=>this.maximize()}>◻</button>
                         </div>
                         <p className="user">
                             karol@ubuntu:{this.props.directory}
