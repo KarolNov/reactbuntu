@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { Rnd } from 'react-rnd';
 
-import { commandsOutput } from '../variables';
-import '../styles/Terminal.scss';
-import { cpus } from 'os';
+import { commandsOutput } from '../../variables';
+import './Terminal.scss';
 
 class Terminal extends Component {
     constructor(props) {
         super(props);
         this.state = {
             command: "help",
+            index: 0,
             commandsArchive: [],
             terminal: {
                 scrolling: true
@@ -25,11 +25,14 @@ class Terminal extends Component {
         if (key === 'Backspace') {
             command = command.slice(0, command.length - 1);
         } else if (key === 'Enter') {
-            this.setState({
-                command: command
-            })
+            command = '';
             this.fireCommand()
-        } else if(key.length===1) {
+        } else if(key === "ArrowUp"){
+            this.setState({
+                index: this.state.index>0 ? this.state.index-- : 0
+            })
+            command = this.state.commandsArchive[this.state.index].command;
+        } else if (key.length === 1) {
             command += key;
         }
         this.setState({
@@ -49,33 +52,35 @@ class Terminal extends Component {
         }
         commandsArchive.push(commandObj);
 
-        let archive = [];
-        for (let i = 0; i < commandsArchive.length; i++) {
-            let prompt = [];
-            prompt.push(<span className="user">karol@ubuntu</span>);
-            prompt.push(":");
-            prompt.push(<span className="location">{this.props.directory}</span>);
-            prompt.push("$");
-            prompt.push(<span className="command">{this.state.commandsArchive[i].command}</span>);
-            let output = commandsArchive[i].output.split("\n");
-            archive.push(<div className={"prompt"}>{prompt}</div>);
-            let multiline = [];
-            output.forEach(line=>{
-                multiline.push(<p>{line}<br/></p>)
-            })
-            archive.push(<div>{multiline}</div>);
-        }
+        let archive =
+            <div style={{ width: '100%' }}>
+                {
+                    commandsArchive.map(el => {
+                        let out = el.output.split("\n").map(line => <p>{line}<br /></p>);
+                        return (
+                            <>
+                                <div className={"prompt"}>
+                                    <span className="user">karol@ubuntu</span>:<span className="location">{this.props.directory}</span>$
+                <span className="command">{el.command}</span>
+                                </div>
+                                <div>
+                                    {out}
+                                </div>
+                            </>
+                        )
+                    })
+                }
+            </div>
 
-        let terminalArchive = [];
-        terminalArchive.push(<div style={{ width: '100%' }}>{archive}</div>);
         this.setState({
             command: "",
             commandsArchive: commandsArchive,
-            terminalArchive: terminalArchive
+            terminalArchive: archive,
+            index: this.state.index++
         });
     }
 
-    maximize(){
+    maximize() {
         this.setState({
             height: "100%",
             width: "100%",
@@ -86,29 +91,28 @@ class Terminal extends Component {
     render() {
         return (
             <Rnd bounds="window" default={{
-                x: 100,
-                y: 200,
+                x: this.props.position.x,
+                y: this.props.position.y,
                 width: 500,
                 height: 300
             }} minWidth={250} minHeight={200}
-            disableDragging={!this.state.terminal.drag}
-            size={this.state.maximized ? {
-                width: this.state.width,
-                height: this.state.height
-            } : null}
-            position={this.state.maximized ? {
-                x: 0,
-                y: 0
-            } : null}
-            onResize={(e)=>console.log(e)}
+                disableDragging={!this.state.terminal.drag}
+                size={this.state.maximized ? {
+                    width: this.state.width,
+                    height: this.state.height
+                } : null}
+                position={this.state.maximized ? {
+                    x: 0,
+                    y: 0
+                } : null}
             >
                 <div className="terminal" onKeyDown={this.getKey} tabIndex='0'>
-                    <div className="toolbar" onMouseEnter={()=>this.setState({terminal:{drag: true}})} 
-                    onMouseLeave={()=>this.setState({terminal:{drag: false}})}>
+                    <div className="toolbar" onMouseEnter={() => this.setState({ terminal: { drag: true } })}
+                        onMouseLeave={() => this.setState({ terminal: { drag: false } })}>
                         <div className="buttons">
-                            <button className="exit">x</button>
+                            <button onClick={() => this.props.toggle("terminal", this.props.id)} className="exit">x</button>
                             <button className="minimize">─</button>
-                            <button onClick={()=>this.maximize()}>◻</button>
+                            <button onClick={() => this.maximize()}>◻</button>
                         </div>
                         <p className="user">
                             karol@ubuntu:{this.props.directory}

@@ -1,6 +1,10 @@
 const commandsOutput = {
-    help: "Help text",
-    about: "Karol Novljaković - JavaScript Developer \n I'm young and ambitious programmer that stared his adventure about 8 years ago by making the Elder Scrolls Morrowind mods. From this time I tried learning C++ and Java (for example by creating simple 8 bit game), so OOP isn't secret to me. \n I've choosen Javascript as my main language. I immediately fell in love with it, because of it's versatility and numerous learning resources. I did couple of projects in Vanilla JS, then I had short adventure with P5 and Pixi playing with HTML5 Canvas possibilities. That I started my first commercial projects by making couple of WP and static sites for my friends. That is when I learned more about CSS3, basics of SASS, HTML5 and even basics of PHP. \n Last six months or more I was focused on learning Javascript popular framework - React and Javascript runtime environment - Node.js. I had occassion to build advanced application for rental company I used to work in. The 'CineRentALL' app, as I called it, is solution for supervising reservations, current rentals and inventory state. I learned a lot about React, Mobx and Express+MySQL while creating it. \n Now as I'm taking a one year break from studying ICT at AGH University I want to find company where I could develop to become Fullstack Javascript Developer."
+    help: `
+    Available commands so far:
+    about - show description of this project,
+    help - show this output
+    `,
+    about: "Open source React project trying to recreate Ubuntu OS view in browser window with basic functionality."
 }
 export{
     commandsOutput

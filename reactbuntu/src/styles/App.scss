@@ -1,15 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono');
 @import url('https://fonts.googleapis.com/css?family=Ubuntu');
 body {
-    background: linear-gradient(45deg, #57003f 0%, #f57453 100%);
     font-family: 'Ubuntu';
-    position: relative;
+}
+.App {
     overflow: hidden;
 }
-
 .desktop {
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
-    height: 100vh;
+    background: linear-gradient(45deg, #57003f 0%, #f57453 100%);
+    position: relative;
+    overflow: hidden;
+    height: calc(100vh - 4rem);
+    width: calc(100vw - 4rem);
+    padding: 2rem;
 }
