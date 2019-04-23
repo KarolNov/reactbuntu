@@ -1,13 +1,13 @@
 {
-  "main.css": "/static/css/main.2ac0a936.chunk.css",
-  "main.js": "/static/js/main.43dd1dcb.chunk.js",
-  "main.js.map": "/static/js/main.43dd1dcb.chunk.js.map",
-  "static/js/1.1bab00c9.chunk.js": "/static/js/1.1bab00c9.chunk.js",
-  "static/js/1.1bab00c9.chunk.js.map": "/static/js/1.1bab00c9.chunk.js.map",
-  "runtime~main.js": "/static/js/runtime~main.229c360f.js",
-  "runtime~main.js.map": "/static/js/runtime~main.229c360f.js.map",
-  "static/css/main.2ac0a936.chunk.css.map": "/static/css/main.2ac0a936.chunk.css.map",
-  "index.html": "/index.html",
-  "precache-manifest.ca0168c8d658a216f7ef4b2ddafa4934.js": "/precache-manifest.ca0168c8d658a216f7ef4b2ddafa4934.js",
-  "service-worker.js": "/service-worker.js"
+  "main.css": "/reactbuntu/static/css/main.2ac0a936.chunk.css",
+  "main.js": "/reactbuntu/static/js/main.01468393.chunk.js",
+  "main.js.map": "/reactbuntu/static/js/main.01468393.chunk.js.map",
+  "static/js/1.1bab00c9.chunk.js": "/reactbuntu/static/js/1.1bab00c9.chunk.js",
+  "static/js/1.1bab00c9.chunk.js.map": "/reactbuntu/static/js/1.1bab00c9.chunk.js.map",
+  "runtime~main.js": "/reactbuntu/static/js/runtime~main.32b99937.js",
+  "runtime~main.js.map": "/reactbuntu/static/js/runtime~main.32b99937.js.map",
+  "static/css/main.2ac0a936.chunk.css.map": "/reactbuntu/static/css/main.2ac0a936.chunk.css.map",
+  "index.html": "/reactbuntu/index.html",
+  "precache-manifest.405fc1f65239a7296a7c179950191ba7.js": "/reactbuntu/precache-manifest.405fc1f65239a7296a7c179950191ba7.js",
+  "service-worker.js": "/reactbuntu/service-worker.js"
 }
