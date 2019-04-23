@@ -21,7 +21,6 @@ class Terminal extends Component {
     getKey(e) {
         let key = e.key;
         let command = this.state.command;
-        console.log(key);
         if (key === 'Backspace') {
             command = command.slice(0, command.length - 1);
         } else if (key === 'Enter') {
@@ -29,9 +28,16 @@ class Terminal extends Component {
             this.fireCommand()
         } else if(key === "ArrowUp"){
             this.setState({
-                index: this.state.index>0 ? this.state.index-- : 0
+                index: this.state.index>0 ? this.state.index-1 : 0
             })
-            command = this.state.commandsArchive[this.state.index].command;
+            let archive = this.state.commandsArchive[this.state.index];
+            command =  typeof archive === "object" ? archive.command : '';
+        } else if(key === "ArrowDown"){
+            this.setState({
+                index: this.state.index<this.state.commandsArchive.length ? this.state.index+1 : 0
+            })
+            let archive = this.state.commandsArchive[this.state.index];
+            command =  typeof archive === "object" ? archive.command : '';
         } else if (key.length === 1) {
             command += key;
         }
@@ -76,7 +82,7 @@ class Terminal extends Component {
             command: "",
             commandsArchive: commandsArchive,
             terminalArchive: archive,
-            index: this.state.index++
+            index: commandsArchive.length
         });
     }
 
